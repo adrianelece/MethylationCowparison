@@ -45,20 +45,21 @@ Outputfile will be called ComparedSites.tsv and consists of 6 columns:
 
 ## Heatmap
 (Adapted from Nanopolish)
-
-> library(ggplot2)
-> library(RColorBrewer)
-> MethylationCowparison <- read.table("ComparedSites.tsv", header=T)
-> colnames(MethylationCowparison) <- c("chrBS","chrONT","freqBS","freqONT","covBS","covONT")
-> colours <- colorRampPalette(rev(brewer.pal(11,'Spectral')))
-> coloursr <- colours(32)
-> 
-> correlationSites <- cor(MethylationCowparison$freqBS, MethylationCowparison$freqONT)
-> 
-> title <- sprintf("Number of sites = %d r = %.3f", nrow(MethylationCowparison), correlationSites)
-> ggplot(MethylationCowparison, aes(freqBS, freqONT)) +
->     geom_bin2d(bins=25) + scale_fill_gradientn(colors=coloursr, trans="log10") +
->     xlab("Bisulfite Methylation Frequency") +
->     ylab("Nanopolish Methylation Frequency") +
->     theme_bw(base_size=20) +
->     ggtitle(title)
+```sh
+ library(ggplot2)
+ library(RColorBrewer)
+ MethylationCowparison <- read.table("ComparedSites.tsv", header=T)
+ colnames(MethylationCowparison) <- c("chrBS","chrONT","freqBS","freqONT","covBS","covONT")
+ colours <- colorRampPalette(rev(brewer.pal(11,'Spectral')))
+ coloursr <- colours(32)
+ 
+ correlationSites <- cor(MethylationCowparison$freqBS, MethylationCowparison$freqONT)
+ 
+ title <- sprintf("Number of sites = %d r = %.3f", nrow(MethylationCowparison), correlationSites)
+ ggplot(MethylationCowparison, aes(freqBS, freqONT)) +
+     geom_bin2d(bins=25) + scale_fill_gradientn(colors=coloursr, trans="log10") +
+     xlab("Bisulfite Methylation Frequency") +
+     ylab("Nanopolish Methylation Frequency") +
+     theme_bw(base_size=20) +
+     ggtitle(title)
+```
