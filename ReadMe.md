@@ -60,20 +60,22 @@ colours <- colorRampPalette(rev(brewer.pal(11,'Spectral')))
 coloursr <- colours(32)
 
 samplen <- "X"
-mincovONT <- 10
-mincovBS <- 10
+mincovONT <- 25
+mincovBS <- 25
+
 
 MethylationCowparisonfiltered <- MethylationCowparison[which(MethylationCowparison$covONT>=mincovONT&MethylationCowparison$covBS>=mincovBS),]
-correlationSites <- cor(MethylationCowparisonfiltered$freqBS, MethylationCowparisonfiltered$freqONT)
+filtered <- which(MethylationCowparisonfiltered$freqONT==0|MethylationCowparisonfiltered$freqONT==1)
 
+MethylationCowparisonfiltered2 <- MethylationCowparisonfiltered[-filtered,]
+correlationSites <- cor(MethylationCowparisonfiltered2$freqBS, MethylationCowparisonfiltered2$freqONT)
 
-title <- sprintf("Number of sites = %d r = %.3f sample = %s", nrow(MethylationCowparisonfiltered), correlationSites,samplen)
-ggplot(MethylationCowparisonfiltered, aes(x=freqBS, y=freqONT)) +
+title <- sprintf("Number of sites = %d r = %.3f sample = %s", nrow(MethylationCowparisonfiltered2), correlationSites,samplen)
+ggplot(MethylationCowparisonfiltered2, aes(x=freqBS, y=freqONT)) +
   geom_bin2d(bins=25) + scale_fill_gradientn(colors=coloursr, trans="log10") +
   xlab("Bisulfite Methylation Frequency") +
   ylab("Nanopolish Methylation Frequency") +
   theme_bw(base_size=20) +
   ggtitle(title)
-
 
 ```
