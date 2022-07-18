@@ -53,24 +53,27 @@ Outputfile will be called ComparedSites.tsv and consists of 6 columns:
 ```sh
 library(ggplot2)
 library(RColorBrewer)
+setwd("dir/")
 MethylationCowparison <- read.table("ComparedSites.tsv", header=F)
 colnames(MethylationCowparison) <- c("chrBS","chrONT","freqBS","freqONT","covBS","covONT")
 colours <- colorRampPalette(rev(brewer.pal(11,'Spectral')))
 coloursr <- colours(32)
 
+samplen <- "X"
 mincovONT <- 10
-mincovBS <- 10 
+mincovBS <- 10
 
 MethylationCowparisonfiltered <- MethylationCowparison[which(MethylationCowparison$covONT>=mincovONT&MethylationCowparison$covBS>=mincovBS),]
 correlationSites <- cor(MethylationCowparisonfiltered$freqBS, MethylationCowparisonfiltered$freqONT)
 
 
-title <- sprintf("Number of sites = %d r = %.3f", nrow(MethylationCowparisonfiltered), correlationSites)
-ggplot(MethylationCowparisonfiltered, aes(freqBS, freqONT)) +
+title <- sprintf("Number of sites = %d r = %.3f sample = %s", nrow(MethylationCowparisonfiltered), correlationSites,samplen)
+ggplot(MethylationCowparisonfiltered, aes(x=freqBS, y=freqONT)) +
   geom_bin2d(bins=25) + scale_fill_gradientn(colors=coloursr, trans="log10") +
   xlab("Bisulfite Methylation Frequency") +
   ylab("Nanopolish Methylation Frequency") +
   theme_bw(base_size=20) +
   ggtitle(title)
+
 
 ```
