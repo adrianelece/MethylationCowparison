@@ -13,11 +13,16 @@ File must not have a header.
 Sexual chromosome need to be renamed as 30 and mitocondrial chromosome as 31. This can be done like:
 > sed -r 's/X/30/g' InputFile.txt | sed -r 's/MT/31/g' | sort -n -k 1 > Bisulfite.txt
  
-  
+Remove scaffolds: 
+> sed -i '/^NW/d' Bisulfite.txt
+
 ## Nanopore file
 Input file needs to be called methylation_renamed.tsv
 File must not have a header.
 8 columns in the following order: chromosome (integer), start site (integer), end site (integer), CpGs in region (integer), called sites (integer), methylated sites (integer), methylation frequency (float up to 1), sequence (character).
+
+Remove scaffolds: 
+> sed -i '/^NW/d' Bisulfite.txt
 
 Again, sexual chromosome need to be renamed as 30 and mitocondrial chromosome as 31. This can be done like:
 > sed -r 's/X/30/g' InputFile.txt | sed -r 's/MT/31/g' | sort -n -k 1 > methylation_renamed.tsv
