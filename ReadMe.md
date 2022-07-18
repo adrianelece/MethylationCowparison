@@ -33,7 +33,7 @@ To compile this program:
 > gfortran MethylationCowparison.f90 -o MethylationCowparison.x
 
 To run it:
-> MethylationCowparison.x
+> ./MethylationCowparison.x
 
 Methylation input files need to be in the same folder as the executable.
 
