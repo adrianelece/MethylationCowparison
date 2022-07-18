@@ -1,5 +1,5 @@
 program compONTvBS
-        !Programa para comparar marcas de metilaciÃƒÂ³n de ONT con BS.
+        !This program compares methylation marks detected using bisulfite sequencing and nanopore sequencing
         implicit none
         integer :: io,i,j,nlinesONT, nlinesBS
         integer, allocatable :: startONT(:),startBS(:),endBS(:),endONTcorrected(:),endONT(:), &
