@@ -95,7 +95,7 @@ ggplot(MethylationCowparisonfiltered2, aes(x=freqBS, y=freqONT)) +
 awk '($11!="nan"&&$11!=0){print $1"\t"$2"\t"$6"\t""CG""\t"$11*$10/100"\t"$10}' X.freq.txt > 5014_1x_physalia.tsv
 ```
 
-
+## R script to create the comparison weigthed methylation plots
 ```
 #!/usr/bin/env Rscript
 
