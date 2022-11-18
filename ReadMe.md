@@ -89,6 +89,13 @@ ggplot(MethylationCowparisonfiltered2, aes(x=freqBS, y=freqONT)) +
 
 # Weighted genome wide methylation
 
+## To transform the files from modbam2bed into the necessary input format:
+
+```
+awk '($11!="nan"&&$11!=0){print $1"\t"$2"\t"$6"\t""CG""\t"$11*$10/100"\t"$10}' X.freq.txt > 5014_1x_physalia.tsv
+```
+
+
 ```
 #!/usr/bin/env Rscript
 
