@@ -92,7 +92,7 @@ ggplot(MethylationCowparisonfiltered2, aes(x=freqBS, y=freqONT)) +
 ## To transform the files from modbam2bed into the necessary input format:
 
 ```
-awk '($11!="nan"&&$11!=0){print $1"\t"$2"\t"$6"\t""CG""\t"$11*$10/100"\t"$10}' X.freq.txt > 5014_1x_physalia.tsv
+awk -v dp="$depth" '($10>=dp&&$11!="nan"){print $1"\t"$2"\t"$3"\t""1""\t"$10"\t"$10*$11/100"\t"$11/100"\t""FAKESEQUENCE"}' $input > $output 
 ```
 
 ## R script to create the comparison weigthed methylation plots
